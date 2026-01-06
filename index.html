@@ -3,642 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Gourmet - Restaurant Moderne</title>
-    <meta name="description" content="Découvrez notre cuisine authentique et notre ambiance chaleureuse.">
-
-    <!-- Import des Polices Google (Poppins pour le texte, Playfair Display pour les titres) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Boulangerie du Quartier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts pour un aspect plus "artisanal" -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Import d'icônes légères (Phosphor Icons - pas de téléchargement requis) -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
     <style>
-        /* =========================================
-           1. VARIABLES DE PERSONNALISATION (EDITER ICI)
-           ========================================= */
-        :root {
-            /* Couleurs */
-            --primary-color: #D4A373;   /* Or / Beige Doré (Accent) */
-            --secondary-color: #264653; /* Bleu Nuit / Vert Foncé (Fond sombre) */
-            --bg-light: #FAFAFA;        /* Fond clair */
-            --text-dark: #2C3E50;       /* Texte principal */
-            --text-light: #ffffff;      /* Texte sur fond sombre */
-            
-            /* Polices */
-            --font-heading: 'Playfair Display', serif; /* Pour les titres (Élégant) */
-            --font-body: 'Poppins', sans-serif;        /* Pour le texte (Moderne) */
-            
-            /* Espacements & Design */
-            --container-width: 1200px;
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
         }
-
-        /* =========================================
-           2. RESET ET BASES
-           ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--font-body);
-            color: var(--text-dark);
-            background-color: var(--bg-light);
-            line-height: 1.6;
+            font-family: 'Lato', sans-serif;
         }
-
-        h1, h2, h3, h4 {
-            font-family: var(--font-heading);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        img { max-width: 100%; display: block; border-radius: var(--border-radius); }
-
-        /* Utilitaires */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-        }
-
-        .section-title span {
-            display: block;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary-color);
-            color: #fff;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            border: 2px solid var(--primary-color);
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        /* =========================================
-           3. NAVIGATION
-           ========================================= */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 15px 0;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .hamburger {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* =========================================
-           4. HERO SECTION (ACCUEIL)
-           ========================================= */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Effet Parallaxe */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* =========================================
-           5. SECTION À PROPOS
-           ========================================= */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-
-        .about-img img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            box-shadow: 20px 20px 0 var(--primary-color); /* Effet cadre décalé */
-        }
-
-        /* =========================================
-           6. SECTION SPÉCIALITÉS (MENU)
-           ========================================= */
-        .specialties {
-            background-color: #fff;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .menu-item {
-            background: var(--bg-light);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid #eee;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .menu-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .menu-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            display: block;
-            margin-top: 15px;
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        /* =========================================
-           7. INFOS PRATIQUES (DARK MODE)
-           ========================================= */
-        .info-section {
-            background-color: var(--secondary-color);
-            color: var(--text-light);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .info-content h2 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-        }
-
-        .info-list {
-            margin: 30px 0;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        .info-item i {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-top: 3px;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 350px;
-            border-radius: var(--border-radius);
-            border: none;
-            filter: grayscale(100%); /* Carte en gris pour le style */
-        }
-
-        /* =========================================
-           8. GALERIE
-           ========================================= */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .gallery-item {
-            height: 250px;
-            overflow: hidden;
-            border-radius: var(--border-radius);
-            position: relative;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* =========================================
-           9. CONTACT FORM
-           ========================================= */
-        .contact-section {
-            background-color: #fff;
-        }
-
-        .form-box {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-light);
-            padding: 40px;
-            border-radius: var(--border-radius);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: inherit;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary-color);
-        }
-
-        .submit-btn {
-            width: 100%;
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-
-        .submit-btn:hover {
-            color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-
-        /* =========================================
-           10. FOOTER
-           ========================================= */
-        footer {
-            background: #1a1a1a;
-            color: #888;
-            text-align: center;
-            padding: 30px 0;
-            font-size: 0.9rem;
-        }
-
-        /* =========================================
-           11. RESPONSIVE (MOBILE/TABLETTE)
-           ========================================= */
-        @media (max-width: 900px) {
-            .hero-content h1 { font-size: 2.8rem; }
-            .about-grid, .info-grid { grid-template-columns: 1fr; }
-            .about-img { margin-top: 30px; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            
-            .hamburger { display: block; }
-            
-            .nav-links {
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                padding: 20px 0;
-                gap: 20px;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-                clip-path: circle(0% at 100% 0);
-                transition: all 0.5s ease-in-out;
-            }
-
-            .nav-links.active {
-                clip-path: circle(150% at 100% 0);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .hero-content h1 { font-size: 2.2rem; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            .section-title h2 { font-size: 2rem; }
+        .hero-pattern {
+            background-color: #fef3c7;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d97706' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
     </style>
 </head>
-<body>
+<body class="bg-stone-50 text-stone-800">
 
-    <!-- NAVIGATION -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">LE GOURMET</div>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home" onclick="toggleMenu()">Accueil</a></li>
-                    <li><a href="#about" onclick="toggleMenu()">À Propos</a></li>
-                    <li><a href="#menu" onclick="toggleMenu()">Carte</a></li>
-                    <li><a href="#infos" onclick="toggleMenu()">Infos</a></li>
-                    <li><a href="#gallery" onclick="toggleMenu()">Galerie</a></li>
-                    <li><a href="#contact" class="btn" style="padding: 8px 20px;" onclick="toggleMenu()">Réserver</a></li>
-                </ul>
-                <div class="hamburger" onclick="toggleMenu()">
-                    <i class="ph ph-list"></i>
-                </div>
-            </nav>
+    <!-- En-tête avec fond coloré -->
+    <header class="hero-pattern border-b-4 border-amber-600">
+        <div class="max-w-3xl mx-auto px-6 py-12 text-center">
+            <div class="inline-block p-3 rounded-full bg-white shadow-md mb-4 text-amber-600">
+                <i class="fa-solid fa-wheat-awn text-4xl"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-amber-900 mb-2">Boulangerie du Quartier</h1>
+            <p class="text-amber-800 text-lg italic">Artisan Boulanger depuis 1998</p>
         </div>
     </header>
 
-    <!-- ACCUEIL / HERO -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Une Cuisine d'Exception</h1>
-            <p>Découvrez des saveurs authentiques dans un cadre chaleureux et moderne. Des produits frais, cuisinés avec passion.</p>
-            <a href="#menu" class="btn">Voir le Menu</a>
-        </div>
-    </section>
+    <!-- Conteneur principal -->
+    <main class="max-w-3xl mx-auto px-6 py-10 space-y-12">
 
-    <!-- À PROPOS -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-text">
-                    <div class="section-title" style="text-align: left; margin-bottom: 30px;">
-                        <span>Notre Histoire</span>
-                        <h2>Tradition & Modernité</h2>
+        <!-- Section Description -->
+        <section class="text-center max-w-2xl mx-auto">
+            <p class="text-lg leading-relaxed text-stone-600">
+                <span class="text-3xl text-amber-600 font-serif">"</span>
+                Bienvenue dans notre boulangerie artisanale. Nous proposons du pain frais pétri sur place avec des farines locales et des pâtisseries traditionnelles préparées chaque matin avec passion.
+                <span class="text-3xl text-amber-600 font-serif">"</span>
+            </p>
+        </section>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Section Services / Menu -->
+            <section class="bg-white p-6 rounded-lg shadow-sm border-t-2 border-amber-500">
+                <h2 class="text-2xl font-bold text-amber-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bread-slice text-amber-500"></i> Nos Produits
+                </h2>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-green-600 mt-1 mr-2 text-xs"></i>
+                        <span>Pains de campagne & Baguettes Tradition</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-green-600 mt-1 mr-2 text-xs"></i>
+                        <span>Viennoiseries pur beurre</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-green-600 mt-1 mr-2 text-xs"></i>
+                        <span>Pâtisseries fines & Tartes de saison</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-green-600 mt-1 mr-2 text-xs"></i>
+                        <span>Formules déjeuner (Sandwichs, Quiches)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-green-600 mt-1 mr-2 text-xs"></i>
+                        <span>Café & Chocolat chaud maison</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section Horaires -->
+            <section class="bg-white p-6 rounded-lg shadow-sm border-t-2 border-amber-500">
+                <h2 class="text-2xl font-bold text-amber-800 mb-4 flex items-center gap-2">
+                    <i class="fa-regular fa-clock text-amber-500"></i> Horaires
+                </h2>
+                <table class="w-full text-left">
+                    <tbody class="divide-y divide-stone-100">
+                        <tr>
+                            <td class="py-2 font-medium">Lundi - Vendredi</td>
+                            <td class="py-2 text-right">07h00 - 19h30</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 font-medium">Samedi</td>
+                            <td class="py-2 text-right">08h00 - 18h00</td>
+                        </tr>
+                        <tr class="text-stone-400">
+                            <td class="py-2">Dimanche</td>
+                            <td class="py-2 text-right italic">Fermé</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <!-- Section Coordonnées (Mise en avant) -->
+        <section class="bg-amber-50 rounded-xl p-8 text-center border border-amber-100">
+            <h2 class="text-2xl font-bold text-amber-800 mb-6">Nous trouver</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-8 text-stone-700">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-2 text-amber-600 text-xl">
+                        <i class="fa-solid fa-location-dot"></i>
                     </div>
-                    <p>Fondé en 2010, Le Gourmet est né de l'amour pour la gastronomie française revisitée. Notre chef s'inspire des produits locaux pour créer des assiettes qui racontent une histoire.</p>
-                    <br>
-                    <p>Que ce soit pour un dîner romantique ou un repas d'affaires, nous vous promettons une expérience inoubliable au cœur de la ville.</p>
+                    <span class="font-bold">Adresse</span>
+                    <span>12 Rue du Commerce<br>75000 Ville-Exemple</span>
                 </div>
-                <div class="about-img">
-                    <!-- Image placeholder restaurant intérieur -->
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Intérieur du restaurant">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SPÉCIALITÉS -->
-    <section id="menu" class="section-padding specialties">
-        <div class="container">
-            <div class="section-title">
-                <span>La Carte</span>
-                <h2>Nos Spécialités</h2>
-            </div>
-            
-            <div class="menu-grid">
-                <!-- Plat 1 -->
-                <div class="menu-item">
-                    <i class="ph ph-fish menu-icon"></i> <!-- Icone Poisson -->
-                    <h3>Filet de Bar Sauvage</h3>
-                    <p>Accompagné de sa purée de patates douces et légumes de saison.</p>
-                    <span class="price">24€</span>
-                </div>
-
-                <!-- Plat 2 -->
-                <div class="menu-item">
-                    <i class="ph ph-cow menu-icon"></i> <!-- Icone Viande -->
-                    <h3>Entrecôte Maturée</h3>
-                    <p>300g de bœuf d'Aubrac, sauce au poivre vert maison et frites fraîches.</p>
-                    <span class="price">28€</span>
-                </div>
-
-                <!-- Plat 3 -->
-                <div class="menu-item">
-                    <i class="ph ph-carrot menu-icon"></i> <!-- Icone Végé -->
-                    <h3>Risotto aux Cèpes</h3>
-                    <p>Risotto crémeux, parmesan 24 mois et huile de truffe blanche.</p>
-                    <span class="price">22€</span>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="btn" style="background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark);">Voir toute la carte</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- INFORMATIONS PRATIQUES & MAP -->
-    <section id="infos" class="section-padding info-section">
-        <div class="container">
-            <div class="info-grid">
-                <div class="info-content">
-                    <h2>Infos Pratiques</h2>
-                    <p style="opacity: 0.8; margin-top: 10px;">Venez nous rendre visite ou appelez-nous pour réserver votre table.</p>
-                    
-                    <div class="info-list">
-                        <div class="info-item">
-                            <i class="ph ph-map-pin"></i>
-                            <div>
-                                <strong>Adresse :</strong><br>
-                                12 Rue de la Gastronomie<br>
-                                75001 Paris, France
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="ph ph-clock"></i>
-                            <div>
-                                <strong>Horaires :</strong><br>
-                                Mar - Sam : 12h00 - 14h30 / 19h00 - 22h30<br>
-                                Dimanche : Brunch 11h00 - 15h00
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="ph ph-phone"></i>
-                            <div>
-                                <strong>Téléphone :</strong><br>
-                                +33 1 23 45 67 89
-                            </div>
-                        </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-2 text-amber-600 text-xl">
+                        <i class="fa-solid fa-phone"></i>
                     </div>
-
-                    <a href="tel:+33123456789" class="btn">Appeler maintenant</a>
-                </div>
-
-                <div class="map-container">
-                    <!-- Google Maps Embed Placeholder -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937604!2d2.349014!3d48.858370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1625000000000!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
+                    <span class="font-bold">Téléphone</span>
+                    <a href="tel:0123456789" class="hover:text-amber-700 transition">01 23 45 67 89</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- GALERIE PHOTOS -->
-    <section id="gallery" class="section-padding">
-        <div class="container">
-            <div class="section-title">
-                <span>L'ambiance</span>
-                <h2>Galerie Photos</h2>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Plat"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Plat"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Salle"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Cocktail"></div>
-            </div>
-        </div>
-    </section>
+    </main>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section-padding contact-section">
-        <div class="container">
-            <div class="section-title">
-                <span>Nous écrire</span>
-                <h2>Contactez-nous</h2>
-            </div>
-            <div class="form-box">
-                <form onsubmit="event.preventDefault(); alert('Message envoyé ! (Simulation)');">
-                    <div class="form-group">
-                        <label for="name">Nom complet</label>
-                        <input type="text" id="name" placeholder="Votre nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Votre email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="5" placeholder="Votre message ou demande de réservation..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn submit-btn">Envoyer le message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Le Gourmet. Tous droits réservés. Design by Expert Web.</p>
-        </div>
+    <!-- Pied de page simple -->
+    <footer class="bg-stone-800 text-stone-400 py-8 text-center mt-auto">
+        <p class="text-sm">&copy; 2024 Boulangerie du Quartier. Fait avec <i class="fa-solid fa-heart text-red-500 mx-1"></i> et de la farine.</p>
     </footer>
-
-    <!-- JAVASCRIPT SIMPLE -->
-    <script>
-        // Gestion du menu Mobile
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Fermer le menu si on clique en dehors (optionnel mais sympa)
-        document.addEventListener('click', (e) => {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.querySelector('.hamburger');
-            
-            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
-        });
-    </script>
 
 </body>
 </html>
